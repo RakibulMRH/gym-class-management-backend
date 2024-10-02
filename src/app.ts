@@ -2,6 +2,7 @@ import express, { Application } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { json } from 'body-parser';
+import morgan from 'morgan';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocs from './config/swagger.config';
 import authRoutes from './routes/auth.route';
@@ -15,6 +16,7 @@ const app: Application = express();
 
 app.use(cors({ origin: process.env.ORIGIN }));
 app.use(json());
+app.use(morgan('dev'));
 
 // Routes
 app.use('/api/auth', authRoutes);

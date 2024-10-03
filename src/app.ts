@@ -14,7 +14,15 @@ dotenv.config();
 
 const app: Application = express();
 
-app.use(cors({ origin: process.env.ORIGIN }));
+// Enable CORS
+app.use(cors({
+    origin:  process.env.ORIGIN ,  // Allow requests from Angular frontend
+    credentials: true,                // Allow credentials like cookies, headers
+    methods: 'GET,POST,PUT,DELETE',   // Allowed HTTP methods
+    allowedHeaders: 'Content-Type,Authorization'  // Allowed headers
+  }));
+  
+  
 app.use(json());
 app.use(morgan('dev'));
 

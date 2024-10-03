@@ -10,15 +10,38 @@ export const createClassSchedule = async (req: Request, res: Response): Promise<
 
   const errors = await validate(dto);
   if (errors.length) {
-    res.status(400).json({ success: false, errors });
-    return; // Ensure the function returns void after sending the response
+    res.status(400).json({
+      success: false,
+      message: 'Validation error occurred.',
+      errorDetails: errors.map(error => ({
+        field: error.property,
+        message: Object.values(error.constraints || {}).join(', ')
+      }))
+    });
+    return;
   }
 
   try {
     const classSchedule = await ClassScheduleService.createClassSchedule(req.body);
-    res.status(201).json({ success: true, classSchedule });
+    res.status(201).json({
+      success: true,
+      statusCode: 201,
+      message: 'Class booked successfully',
+      data: classSchedule
+    });
   } catch (error) {
-    res.status(400).json({ success: false, message: (error as Error).message });
+    if ((error as Error).name === 'BookingLimitExceeded') {
+      res.status(400).json({
+        success: false,
+        message: 'Class schedule is full. Maximum 10 trainees allowed per schedule.'
+      });
+    } else {
+      res.status(400).json({
+        success: false,
+        message: (error as Error).message,
+        errorDetails: (error as Error).message
+      });
+    }
   }
 };
 
@@ -26,9 +49,18 @@ export const createClassSchedule = async (req: Request, res: Response): Promise<
 export const getAllClassSchedules = async (req: Request, res: Response): Promise<void> => {
   try {
     const schedules = await ClassScheduleService.getAllClassSchedules();
-    res.status(200).json({ success: true, schedules });
+    res.status(200).json({
+      success: true,
+      statusCode: 200,
+      message: 'Class schedules retrieved successfully',
+      data: schedules
+    });
   } catch (error) {
-    res.status(400).json({ success: false, message: (error as Error).message });
+    res.status(400).json({
+      success: false,
+      message: (error as Error).message,
+      errorDetails: (error as Error).message
+    });
   }
 };
 
@@ -36,9 +68,18 @@ export const getAllClassSchedules = async (req: Request, res: Response): Promise
 export const updateClassSchedule = async (req: Request, res: Response): Promise<void> => {
   try {
     const classSchedule = await ClassScheduleService.updateClassSchedule(req.params.id, req.body);
-    res.status(200).json({ success: true, classSchedule });
+    res.status(200).json({
+      success: true,
+      statusCode: 200,
+      message: 'Class schedule updated successfully',
+      data: classSchedule
+    });
   } catch (error) {
-    res.status(400).json({ success: false, message: (error as Error).message });
+    res.status(400).json({
+      success: false,
+      message: (error as Error).message,
+      errorDetails: (error as Error).message
+    });
   }
 };
 
@@ -46,8 +87,16 @@ export const updateClassSchedule = async (req: Request, res: Response): Promise<
 export const deleteClassSchedule = async (req: Request, res: Response): Promise<void> => {
   try {
     await ClassScheduleService.deleteClassSchedule(req.params.id);
-    res.status(200).json({ success: true, message: 'Class schedule deleted successfully' });
+    res.status(200).json({
+      success: true,
+      statusCode: 200,
+      message: 'Class schedule deleted successfully'
+    });
   } catch (error) {
-    res.status(400).json({ success: false, message: (error as Error).message });
+    res.status(400).json({
+      success: false,
+      message: (error as Error).message,
+      errorDetails: (error as Error).message
+    });
   }
 };

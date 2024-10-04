@@ -2,6 +2,12 @@
 
 This is the backend for the **Gym Class Scheduling and Membership Management System**. It is built with **Node.js**, **Express.js**, and uses **PostgreSQL** as the database. The system is designed to manage gym operations efficiently, defining three roles: Admin, Trainer, and Trainee, each with specific permissions.
 
+## ER Diagram
+
+Below is the Entity-Relationship (ER) diagram for the Gym Class Management System:
+
+![ER Diagram](./er_diagram.png)
+
 ## Project Overview
 
 The system provides functionality to manage gym classes, trainer profiles, and trainee bookings, as well as role-based access to different features such as:

@@ -1,4 +1,4 @@
-import { IsDateString, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsDateString, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateClassScheduleDTO {
   @IsDateString()
@@ -8,5 +8,6 @@ export class CreateClassScheduleDTO {
   time!: string;
 
   @IsNumber()
+  @IsOptional()
   trainerId!: number;
 }

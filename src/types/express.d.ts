@@ -3,9 +3,9 @@ import { Request } from 'express';
 declare module 'express-serve-static-core' {
   interface Request {
     user?: {
-        id: string;
-        email: any;  
-        fullName: any;
+      id: string;
+      email: any;  
+      fullName: any;
       role: 'ADMIN' | 'TRAINER' | 'TRAINEE'; 
     };
   }

@@ -28,8 +28,8 @@ model ClassSchedule {
   date      DateTime
   time      String
   duration  Int
-  trainer   User     @relation(fields: [trainerId], references: [id])
-  trainerId Int
+  trainer   User?    @relation(fields: [trainerId], references: [id])
+  trainerId Int?
   bookings  Booking[]
 }
 

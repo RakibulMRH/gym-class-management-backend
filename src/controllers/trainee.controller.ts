@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { TraineeService } from '../services/trainee.service';
 
 export const updateProfile = async (req: Request, res: Response): Promise<void> => {
-  try {
+  try { 
     const trainee = await TraineeService.updateProfile(req.user!.id, req.body);
     res.status(200).json({
       success: true,
@@ -24,6 +24,7 @@ export const updateProfile = async (req: Request, res: Response): Promise<void> 
 
 export const bookClass = async (req: Request, res: Response): Promise<void> => {
   try {
+    console.log('User ID:', req.user?.id); // Log the user ID
     const booking = await TraineeService.bookClass(req.user!.id, req.body.classScheduleId);
     res.status(201).json({
       success: true,
@@ -52,7 +53,8 @@ export const bookClass = async (req: Request, res: Response): Promise<void> => {
 
 export const cancelBooking = async (req: Request, res: Response): Promise<void> => {
   try {
-    await TraineeService.cancelBooking(req.user!.id, req.params.bookingId);
+    console.log('User ID:', req.user?.id); // Log the user ID
+    await TraineeService.cancelBooking(req.user!.id, Number(req.params.bookingId));
     res.status(200).json({
       success: true,
       statusCode: 200,
@@ -77,3 +79,43 @@ export const cancelBooking = async (req: Request, res: Response): Promise<void> 
     }
   }
 };
+ 
+export const getProfile = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const tokenUserId = req.user!.id;
+    const { id } = req.params;
+
+    // Check if the id from the request matches the id from the token
+    if (Number(id) !== Number(tokenUserId)) {
+      res.status(403).json({
+        success: false,
+        message: 'Forbidden. You are not allowed to access this profile.',
+      });
+      return;
+    }
+
+    const trainee = await TraineeService.getProfile(tokenUserId);
+    if (!trainee) {
+      res.status(404).json({
+        success: false,
+        message: 'Profile not found.',
+      });
+      return;
+    }
+    res.status(200).json({
+      success: true,
+      statusCode: 200,
+      message: 'Profile retrieved successfully',
+      data: trainee
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: 'An error occurred while retrieving the profile.',
+      errorDetails: {
+        field: 'profile',
+        message: (error as Error).message
+      }
+    });
+  }
+}; 

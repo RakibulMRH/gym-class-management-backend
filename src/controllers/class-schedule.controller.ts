@@ -26,7 +26,7 @@ export const createClassSchedule = async (req: Request, res: Response): Promise<
     res.status(201).json({
       success: true,
       statusCode: 201,
-      message: 'Class booked successfully',
+      message: 'Class Schedule Created successfully',
       data: classSchedule
     });
   } catch (error) {
@@ -38,7 +38,7 @@ export const createClassSchedule = async (req: Request, res: Response): Promise<
     } else {
       res.status(400).json({
         success: false,
-        message: (error as Error).message,
+        message: 'An error occurred while creating the class schedule.',
         errorDetails: (error as Error).message
       });
     }
@@ -58,7 +58,7 @@ export const getAllClassSchedules = async (req: Request, res: Response): Promise
   } catch (error) {
     res.status(400).json({
       success: false,
-      message: (error as Error).message,
+      message: 'An error occurred while retrieving the class schedules.',
       errorDetails: (error as Error).message
     });
   }
@@ -77,7 +77,7 @@ export const updateClassSchedule = async (req: Request, res: Response): Promise<
   } catch (error) {
     res.status(400).json({
       success: false,
-      message: (error as Error).message,
+      message: 'An error occurred while updating the class schedule.',
       errorDetails: (error as Error).message
     });
   }
@@ -95,7 +95,7 @@ export const deleteClassSchedule = async (req: Request, res: Response): Promise<
   } catch (error) {
     res.status(400).json({
       success: false,
-      message: (error as Error).message,
+      message: 'An error occurred while deleting the class schedule.',
       errorDetails: (error as Error).message
     });
   }

@@ -7,7 +7,7 @@ const router = Router();
 
 /**
  * @swagger
- * /trainee/profile/{id}:
+ * /api/trainee/profile/{id}:
  *  get:
  *   tags:
  *    - Trainee Management
@@ -47,11 +47,9 @@ const router = Router();
  
 router.get('/profile/:id', authenticateJWT, roleMiddleware('TRAINEE'), getProfile); // Define the route for getting the profile
 
-
-
 /**
  * @swagger
- * /trainee/update-profile:
+ * /api/trainee/update-profile:
  *   put:
  *     tags:
  *       - Trainee Management
@@ -121,7 +119,7 @@ router.put('/update-profile', authenticateJWT, roleMiddleware('TRAINEE'), update
 
 /**
  * @swagger
- * /trainee/book-class:
+ * /api/trainee/book-class:
  *   post:
  *     tags:
  *       - Class Booking
@@ -206,7 +204,7 @@ router.post('/book-class', authenticateJWT, roleMiddleware('TRAINEE'), bookClass
 
 /**
  * @swagger
- * /trainee/cancel-booking/{bookingId}:
+ * /api/trainee/cancel-booking/{bookingId}:
  *   delete:
  *     tags:
  *       - Class Booking

@@ -12,7 +12,7 @@ const router = Router();
 
 /**
  * @swagger
- * /class-schedule/create:
+ * /api/class-schedule/create:
  *   post:
  *     tags:
  *       - Class Scheduling
@@ -77,7 +77,7 @@ router.post('/create', authenticateJWT, roleMiddleware('ADMIN'), createClassSche
 
 /**
  * @swagger
- * /class-schedule/list:
+ * /api/class-schedule/list:
  *   get:
  *     tags:
  *       - Class Scheduling
@@ -126,7 +126,7 @@ router.get('/list', authenticateJWT, getAllClassSchedules);
 
 /**
  * @swagger
- * /class-schedule/update/{id}:
+ * /api/class-schedule/update/{id}:
  *   put:
  *     tags:
  *       - Class Scheduling
@@ -200,7 +200,7 @@ router.put('/update/:id', authenticateJWT, roleMiddleware('ADMIN'), updateClassS
 
 /**
  * @swagger
- * /class-schedule/delete/{id}:
+ * /api/class-schedule/delete/{id}:
  *   delete:
  *     tags:
  *       - Class Scheduling

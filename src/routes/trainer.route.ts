@@ -12,7 +12,7 @@ const router = Router();
 
 /**
  * @swagger
- * /trainer/create:
+ * /api/trainer/create:
  *   post:
  *     tags:
  *       - Trainer Management
@@ -94,7 +94,7 @@ router.post('/create', authenticateJWT, roleMiddleware('ADMIN'), createTrainer);
 
 /**
  * @swagger
- * /trainer/update/{id}:
+ * /api/trainer/update/{id}:
  *   put:
  *     tags:
  *       - Trainer Management
@@ -180,7 +180,7 @@ router.put('/update/:id', authenticateJWT, roleMiddleware('ADMIN'), updateTraine
 
 /**
  * @swagger
- * /trainer/delete/{id}:
+ * /api/trainer/delete/{id}:
  *   delete:
  *     tags:
  *       - Trainer Management
@@ -238,7 +238,7 @@ router.delete('/delete/:id', authenticateJWT, roleMiddleware('ADMIN'), deleteTra
 
 /**
  * @swagger
- * /trainer/list:
+ * /api/trainer/list:
  *   get:
  *     tags:
  *       - Trainer Management

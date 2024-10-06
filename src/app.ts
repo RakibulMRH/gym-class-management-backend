@@ -31,6 +31,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/class-schedule', classScheduleRoutes);
 app.use('/api/trainee', traineeRoutes);
 app.use('/api/trainer', trainerRoutes);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 // Swagger setup
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));

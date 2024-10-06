@@ -8,11 +8,6 @@ const swaggerOptions = {
       version: '1.0.0',
       description: 'API documentation for the Gym Class Scheduling and Membership Management System',
     },
-    servers: [
-      {
-        url: 'http://localhost:3000/api',
-      },
-    ],
     components: {
       securitySchemes: {
         BearerAuth: {
